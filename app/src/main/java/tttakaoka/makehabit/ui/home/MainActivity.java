@@ -1,4 +1,4 @@
-package tttakaoka.makehabit;
+package tttakaoka.makehabit.ui.home;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.parse.ParseObject;
+
+import tttakaoka.makehabit.R;
 
 public class MainActivity extends AppCompatActivity {
 
