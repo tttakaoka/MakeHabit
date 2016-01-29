@@ -1,20 +1,22 @@
 package tttakaoka.makehabit.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * 習慣
  */
-public class Habit {
+public class Habit implements Parcelable {
 
-    private int id;
-
-    private int title;
-    private boolean mastered = false;
-    private int continuousCount = 0;
-    private Date masteredAt;
-    private Date createdAt = new Date();
-    private Date updatedAt = new Date();
+    public int id;
+    public int title;
+    public boolean mastered = false;
+    public int continuousCount = 0;
+    public Date masteredAt;
+    public Date createdAt = new Date();
+    public Date updatedAt = new Date();
 
     public Habit(RealmHabit realmHabit) {
         this.id = realmHabit.getId();
@@ -54,4 +56,41 @@ public class Habit {
         return updatedAt;
     }
 
+    protected Habit(Parcel in) {
+        id = in.readInt();
+        title = in.readInt();
+        mastered = in.readByte() != 0;
+        continuousCount = in.readInt();
+        masteredAt = new Date(in.readLong());
+        createdAt = new Date(in.readLong());
+        updatedAt = new Date(in.readLong());
+    }
+
+    public static final Creator<Habit> CREATOR = new Creator<Habit>() {
+        @Override
+        public Habit createFromParcel(Parcel in) {
+            return new Habit(in);
+        }
+
+        @Override
+        public Habit[] newArray(int size) {
+            return new Habit[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(title);
+        dest.writeByte((byte) (mastered ? 1 : 0));
+        dest.writeInt(continuousCount);
+        dest.writeLong(masteredAt.getTime());
+        dest.writeLong(createdAt.getTime());
+        dest.writeLong(updatedAt.getTime());
+    }
 }
