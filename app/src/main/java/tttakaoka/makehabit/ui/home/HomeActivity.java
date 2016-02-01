@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, new HabitDeclareFragment())
+                    .add(R.id.fragment_container, new DashBoardFragment())
                     .commit();
         }
     }
